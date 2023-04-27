@@ -1,12 +1,7 @@
 spring:
-  datasource:
-    url: jdbc:h2:mem:usersdb
-    username: sa
-    password:
-    driverClassName: org.h2.Driver
+  profiles:
+    active: test
 
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: true
 
-  h2:
-    console.enabled: true
