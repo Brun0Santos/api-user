@@ -1,5 +1,6 @@
 package com.dev.api.api.entities;
 
+import com.dev.api.api.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -20,16 +21,20 @@ public class UserEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<OrderEntity> orders = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     public UserEntity() {
 
     }
 
-    public UserEntity(Integer id, String email, String name, String number, String password) {
+    public UserEntity(Integer id, String email, String name, String number, String password, OrderStatus status) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.number = number;
         this.password = password;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -54,5 +59,9 @@ public class UserEntity {
 
     public List<OrderEntity> getOrders() {
         return orders;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
     }
 }
