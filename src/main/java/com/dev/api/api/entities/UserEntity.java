@@ -2,6 +2,9 @@ package com.dev.api.api.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_user")
 public class UserEntity {
@@ -13,7 +16,8 @@ public class UserEntity {
     private String name;
     private String number;
     private String password;
-
+    @OneToMany(mappedBy = "client")
+    private List<OrderEntity> orders = new ArrayList<>();
     public UserEntity() {
 
     }
@@ -44,5 +48,9 @@ public class UserEntity {
 
     public String getPassword() {
         return password;
+    }
+
+    public List<OrderEntity> getOrders() {
+        return orders;
     }
 }
