@@ -1,5 +1,6 @@
 package com.dev.api.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class UserEntity {
     private String name;
     private String number;
     private String password;
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<OrderEntity> orders = new ArrayList<>();
     public UserEntity() {
