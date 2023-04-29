@@ -3,6 +3,8 @@ package com.dev.api.api.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -14,6 +16,9 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private UserEntity client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItemEntity> items = new HashSet<>();
 
     public OrderEntity() {
     }
@@ -34,5 +39,9 @@ public class OrderEntity {
 
     public UserEntity getClient() {
         return client;
+    }
+
+    public Set<OrderItemEntity> getItems() {
+        return this.items;
     }
 }

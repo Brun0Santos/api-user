@@ -1,6 +1,7 @@
 package com.dev.api.api.entities;
 
 import com.dev.api.api.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -9,15 +10,16 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_order_item")
-public class OrderItem {
+public class OrderItemEntity {
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
-    public OrderItem() {
+    public OrderItemEntity() {
     }
 
+    @JsonIgnore
     public OrderEntity getOrder() {
         return id.getOrder();
     }
@@ -34,7 +36,7 @@ public class OrderItem {
         id.setProduct(product);
     }
 
-    public OrderItem(OrderEntity order, ProductEntity product, Integer quantity, Double price) {
+    public OrderItemEntity(OrderEntity order, ProductEntity product, Integer quantity, Double price) {
         this.id.setOrder(order);
         this.id.setProduct(product);
         this.quantity = quantity;
@@ -45,12 +47,20 @@ public class OrderItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderItem orderItem = (OrderItem) o;
-        return Objects.equals(id, orderItem.id);
+        OrderItemEntity orderItemEntity = (OrderItemEntity) o;
+        return Objects.equals(id, orderItemEntity.id);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public Double getPrice() {
+        return price;
     }
 }
