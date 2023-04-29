@@ -17,8 +17,11 @@ public class OrderEntity {
     @JoinColumn(name = "client_id")
     private UserEntity client;
 
-    @OneToMany(mappedBy = "id.order")
+    @OneToMany(mappedBy = "id.order", cascade = CascadeType.ALL)
     private Set<OrderItemEntity> items = new HashSet<>();
+
+    @OneToOne(mappedBy = "order")
+    private PaymentEntity payment;
 
     public OrderEntity() {
     }
@@ -43,5 +46,13 @@ public class OrderEntity {
 
     public Set<OrderItemEntity> getItems() {
         return this.items;
+    }
+
+    public PaymentEntity getPayment() {
+        return payment;
+    }
+
+    public void setPayment(PaymentEntity payment) {
+        this.payment = payment;
     }
 }

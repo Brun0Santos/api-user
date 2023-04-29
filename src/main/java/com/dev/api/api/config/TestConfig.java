@@ -73,5 +73,10 @@ public class TestConfig implements CommandLineRunner {
 
         orderItemRepository.saveAll(Arrays.asList(orderItemEntityOne, orderItemEntityTwo, orderItemEntityThree,
                 orderItemEntityFour, orderItemEntityFive));
+
+        PaymentEntity payment = new PaymentEntity(null, LocalDateTime.now().plusHours(8), orderTwo);
+        orderTwo.setPayment(payment);
+
+        orderRepository.save(orderOne);
     }
 }
