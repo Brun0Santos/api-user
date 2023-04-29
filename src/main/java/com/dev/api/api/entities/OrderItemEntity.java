@@ -27,7 +27,7 @@ public class OrderItemEntity {
     public void setOrder(OrderEntity order) {
         id.setOrder(order);
     }
-
+    
     public ProductEntity getProduct() {
         return id.getProduct();
     }

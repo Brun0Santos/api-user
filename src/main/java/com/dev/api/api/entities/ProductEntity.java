@@ -1,5 +1,6 @@
 package com.dev.api.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -20,6 +21,9 @@ public class ProductEntity {
     @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private final Set<CategoryEntity> categories = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItemEntity> items = new HashSet<>();
 
     public ProductEntity() {
     }
@@ -54,5 +58,14 @@ public class ProductEntity {
 
     public Set<CategoryEntity> getCategories() {
         return categories;
+    }
+
+    @JsonIgnore
+    public Set<OrderEntity> getOrders() {
+        Set<OrderEntity> set = new HashSet<>();
+        for (OrderItemEntity x : items) {
+            set.add(x.getOrder());
+        }
+        return set;
     }
 }
