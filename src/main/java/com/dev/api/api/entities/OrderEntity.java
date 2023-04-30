@@ -17,10 +17,10 @@ public class OrderEntity {
     @JoinColumn(name = "client_id")
     private UserEntity client;
 
-    @OneToMany(mappedBy = "id.order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "id.order")
     private Set<OrderItemEntity> items = new HashSet<>();
 
-    @OneToOne(mappedBy = "order")
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private PaymentEntity payment;
 
     public OrderEntity() {
@@ -46,6 +46,14 @@ public class OrderEntity {
 
     public Set<OrderItemEntity> getItems() {
         return this.items;
+    }
+
+    public Double getTotal() {
+        double sum = 0.0;
+        for (OrderItemEntity x : items) {
+            sum += x.getSubTotal();
+        }
+        return sum;
     }
 
     public PaymentEntity getPayment() {

@@ -77,6 +77,6 @@ public class TestConfig implements CommandLineRunner {
         PaymentEntity payment = new PaymentEntity(null, LocalDateTime.now().plusHours(8), orderTwo);
         orderTwo.setPayment(payment);
 
-        orderRepository.save(orderOne);
+        orderRepository.save(orderTwo);
     }
 }

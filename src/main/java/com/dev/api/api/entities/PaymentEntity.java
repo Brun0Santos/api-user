@@ -1,5 +1,6 @@
 package com.dev.api.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,8 @@ public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private LocalDateTime localDateTime;
+    private LocalDateTime date;
+    @JsonIgnore
     @OneToOne
     @MapsId
     private OrderEntity order;
@@ -20,7 +22,7 @@ public class PaymentEntity {
 
     public PaymentEntity(Integer id, LocalDateTime localDateTime, OrderEntity order) {
         this.id = id;
-        this.localDateTime = localDateTime;
+        this.date = localDateTime;
         this.order = order;
     }
 
@@ -29,8 +31,8 @@ public class PaymentEntity {
         return id;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public LocalDateTime getDate() {
+        return date;
     }
 
     public OrderEntity getOrder() {
