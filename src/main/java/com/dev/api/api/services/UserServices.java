@@ -1,6 +1,7 @@
 package com.dev.api.api.services;
 
 import com.dev.api.api.entities.UserEntity;
+import com.dev.api.api.execeptions.NotFoundException;
 import com.dev.api.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,7 @@ public class UserServices {
 
     public Optional<UserEntity> getUserFromID(Integer id) {
         Optional<UserEntity> user = repository.findById(id);
-        user.orElseThrow();
-        return user;
+        return Optional.ofNullable(user.orElseThrow(() -> new NotFoundException("User not found")));
     }
 
     public UserEntity saveUser(UserEntity user) {
