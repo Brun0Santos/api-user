@@ -64,4 +64,22 @@ public class UserEntity {
     public OrderStatus getStatus() {
         return status;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public static void updateData(UserEntity user, UserEntity userData) {
+        user.setName(userData.getName());
+        user.setNumber(userData.getNumber());
+        user.setPassword(user.getPassword());
+    }
 }

@@ -31,5 +31,11 @@ public class UserServices {
     public void deleteUser(Integer id) {
         repository.deleteById(id);
     }
+
+    public UserEntity updateUser(Integer id, UserEntity userForm) {
+        UserEntity userFromDatabase = repository.getReferenceById(id);
+        UserEntity.updateData(userFromDatabase, userForm);
+        return repository.save(userFromDatabase);
+    }
 }
 
