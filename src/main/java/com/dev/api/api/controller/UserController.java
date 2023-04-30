@@ -3,11 +3,9 @@ package com.dev.api.api.controller;
 import com.dev.api.api.entities.UserEntity;
 import com.dev.api.api.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,5 +26,11 @@ public class UserController {
     @GetMapping("/{id}")
     public Optional<UserEntity> returnUserFromId(@PathVariable("id") Integer id) {
         return services.getUserFromID(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<UserEntity> insertUser(@RequestBody UserEntity user) {
+        services.saveUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 }

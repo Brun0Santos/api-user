@@ -1,6 +1,5 @@
 package com.dev.api.api.services;
 
-
 import com.dev.api.api.entities.UserEntity;
 import com.dev.api.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,10 @@ public class UserServices {
         Optional<UserEntity> user = repository.findById(id);
         user.orElseThrow();
         return user;
+    }
+
+    public UserEntity saveUser(UserEntity user) {
+        return repository.save(user);
     }
 }
 
