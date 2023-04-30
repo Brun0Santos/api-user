@@ -33,4 +33,10 @@ public class UserController {
         services.saveUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UserEntity> delete(@PathVariable Integer id) {
+        services.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
 }
